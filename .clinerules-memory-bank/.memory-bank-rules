@@ -1,0 +1,38 @@
+# Memory Bank Rules
+
+## Purpose
+The Memory Bank is the persistent knowledge base for this project. It ensures continuity across sessions and provides context for all development decisions.
+
+## File Structure
+```
+.clinerules-memory-bank/
+├── .memory-bank-rules      # This file - rules for maintaining the bank
+├── activeContext.md        # The "Now": Current focus, recent changes, immediate next steps
+├── progress.md             # The "What": Checklist of features, bug fixes, done vs. pending
+├── productContext.md       # The "Why": Business logic, user personas, problem being solved
+├── systemPatterns.md       # The "How": Tech stack, architectural decisions, design patterns, CI/CD
+└── techStack.md            # Explicit versions, infrastructure specs, API contracts
+```
+
+## Update Rules
+
+### When to Update
+1. **After completing any task** - Update progress.md
+2. **When context changes** - Update activeContext.md with new focus
+3. **When architecture changes** - Update systemPatterns.md
+4. **When requirements change** - Update productContext.md
+5. **When dependencies change** - Update techStack.md
+
+### How to Update
+1. Read the current file before modifying
+2. Append new information, don't delete unless obsolete
+3. Keep a chronological log of decisions in activeContext.md
+4. Mark completed items in progress.md with [x]
+5. Add new items to progress.md as they're discovered
+
+### Critical Rules
+- NEVER delete historical context from activeContext.md
+- ALWAYS update progress.md when a task completes
+- ALWAYS read the relevant memory bank files before starting work
+- Keep descriptions concise but informative
+- Use timestamps for significant decisions

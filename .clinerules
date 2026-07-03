@@ -1,0 +1,45 @@
+# Cline Rules for my-thinker-buddy
+
+## Project Overview
+Chain-of-Thought Reasoning Engine that processes questions through structured analytical frameworks (Fishbone, Fault Tree, Iceberg, Apollo RCA, STAMP, Swiss Cheese, Cynefin, DMAIC) using an OpenAI-compatible API (sumopod).
+
+## Development Rules
+
+### Code Style
+- Python 3.11+ with type hints on all functions
+- Use `pydantic` for data models
+- Follow PEP 8 with 100 char line limit
+- Use `async/await` for LLM API calls
+- Docstrings on all public methods (Google style)
+
+### Architecture Rules
+- Each framework is a separate module in `src/frameworks/`
+- All frameworks inherit from `BaseFramework` in `src/frameworks/base.py`
+- LLM calls go through `src/llm_adapter.py` only
+- Orchestrator in `src/orchestrator.py` manages chain execution
+- No hardcoded API keys - always use `.env`
+- Streamlit UI in `app.py`, CLI in `main.py`
+
+### Framework Implementation Pattern
+Each framework must implement:
+1. `name` property - framework name
+2. `description` property - what it's good for
+3. `steps` property - list of step definitions
+4. `generate_prompt(step_index, question, previous_outputs)` - builds LLM prompt for each step
+5. `should_terminate(step_index, output)` - determines if chain should stop early
+
+### Git Rules
+- Commit messages: `type(scope): description` (e.g., `feat(fishbone): add framework implementation`)
+- Branch from `main` for features
+- One commit per logical change
+
+### Testing
+- Unit tests in `tests/` mirroring `src/` structure
+- Each framework needs at least one test
+- Mock LLM calls in tests
+
+### Deployment (Tencent VPS)
+- Streamlit runs on port 8501
+- Use `screen` or `systemd` for persistence
+- Nginx reverse proxy for multiple apps
+- Resource budget: 2vCPU, 2GB RAM

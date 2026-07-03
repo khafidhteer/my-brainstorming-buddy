@@ -1,0 +1,49 @@
+# ============================================================
+# Docker Compose — My Thinker Buddy
+# ============================================================
+# This file tells Docker how to run the app.
+#
+# How to use:
+#   docker compose up -d          # Start the app
+#   docker compose down           # Stop the app
+#   docker compose logs -f        # See live logs
+#   docker compose pull           # Get latest version
+# ============================================================
+
+services:
+  thinker-buddy:
+    # Build from the Dockerfile in this folder
+    build: .
+
+    # Give the container a friendly name
+    container_name: my-thinker-buddy
+
+    # Always restart unless the user manually stops it
+    restart: unless-stopped
+
+    # Map port 8501 on your server to port 8501 in the container
+    # Change the left number (e.g., 8501:8501 → 8502:8501) if port 8501 is already in use
+    ports:
+      - "8501:8501"
+
+    # Load configuration from the .env file
+    # Make sure you've copied .env.example to .env and filled in your API key
+    env_file:
+      - .env
+
+    # Optional: Limit how much CPU and memory this app can use
+    # This is helpful on a shared VPS where other apps also need resources
+    # Remove the '#' below to enable:
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '0.5'      # Max 50% of one CPU core
+    #       memory: 512M     # Max 512 MB of RAM
+
+    # Health check to confirm the app is running properly
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8501/_stcore/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s

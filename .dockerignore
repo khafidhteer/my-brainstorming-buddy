@@ -1,0 +1,45 @@
+# ============================================================
+# Files to EXCLUDE from the Docker image
+# ============================================================
+# These files are for development only and don't need to be
+# in the production image. This keeps the image smaller.
+# ============================================================
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Git files (not needed in production)
+.git/
+.gitignore
+.gitattributes
+
+# Environment files (API keys should be passed at runtime, not baked into the image)
+.env
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Tests (not needed in production)
+tests/
+*.test.py
+
+# Documentation
+*.md
+LICENSE
+
+# Docker files (don't copy the Dockerfile into the image)
+Dockerfile
+.dockerignore
+docker-compose*.yml
+nginx/

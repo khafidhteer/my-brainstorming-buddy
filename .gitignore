@@ -1,0 +1,50 @@
+# ============================================================
+# .gitignore — My Thinker Buddy
+# ============================================================
+# Files and folders listed here will NOT be committed to Git.
+# This protects your personal information (API keys, etc.)
+# from being pushed to a public GitHub repo.
+# ============================================================
+
+# ===== SECURITY: Never commit these! =====
+# Your API key and configuration (contains secrets)
+.env
+.env.local
+# Note: .env.example IS committed — it's just a template without secrets
+
+# ===== Python cache files =====
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyc
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# ===== IDE and editor files (your personal settings) =====
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ===== OS files =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== Docker (optional: uncomment if you don't want to commit these) =====
+# Dockerfile
+# docker-compose.yml
+# docker-compose-with-n8n.yml
+# .dockerignore
+# nginx/
+
+# ===== Project-specific =====
+# Any local test outputs or temporary files
+*.log
+*.tmp

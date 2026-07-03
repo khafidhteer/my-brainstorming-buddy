@@ -1,0 +1,74 @@
+# ============================================================
+# Docker Compose — My Thinker Buddy + n8n (example)
+# ============================================================
+# This is a REFERENCE file showing how to run this app
+# alongside n8n on the same VPS.
+#
+# How to use:
+#   1. Copy this file to your server
+#   2. Rename it to 'docker-compose.yml' (or use -f flag)
+#   3. Run: docker compose -f docker-compose-with-n8n.yml up -d
+#
+# If you're not using n8n, just use the regular docker-compose.yml
+# ============================================================
+
+services:
+  # ===== My Thinker Buddy =====
+  thinker-buddy:
+    build: .
+    container_name: my-thinker-buddy
+    restart: unless-stopped
+
+    # IMPORTANT: If port 8501 is already used by another app,
+    # change the left number (e.g., 8502:8501)
+    ports:
+      - "8501:8501"
+
+    # Load your API key from .env file
+    env_file:
+      - .env
+
+    # Optional: Limit resources so n8n and Thinker Buddy don't compete
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'       # Max 50% of one CPU core
+          memory: 512M      # Max 512 MB of RAM
+
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8501/_stcore/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+  # ===== n8n (Workflow Automation) =====
+  # This is an example of running n8n alongside Thinker Buddy.
+  # Remove this section if you don't need n8n.
+  n8n:
+    image: n8nio/n8n
+    container_name: n8n
+    restart: unless-stopped
+
+    ports:
+      # n8n runs on port 5678 by default
+      - "5678:5678"
+
+    # n8n stores its data in a volume (persistent storage)
+    volumes:
+      - n8n_data:/home/node/.n8n
+
+    environment:
+      - N8N_SECURE_COOKIE=false
+
+  # ===== Optional: Add other apps here =====
+  # Follow the same pattern:
+  #   app-name:
+  #     image: some-image
+  #     ports:
+  #       - "HOST_PORT:CONTAINER_PORT"
+  #     restart: unless-stopped
+
+# Define named volumes for persistent data
+volumes:
+  n8n_data:
