@@ -1,4 +1,4 @@
-# 🤔 My Thinker Buddy
+# 🤔 My Brainstorming Buddy
 
 **Chain-of-Thought Reasoning Engine** — A multi-framework analytical system that processes questions through structured reasoning chains using an OpenAI-compatible API (sumopod).
 
@@ -88,7 +88,7 @@ python main.py frameworks
 ## 📁 Project Structure
 
 ```
-my-thinker-buddy/
+my-brainstorming-buddy/
 ├── app.py                    # Streamlit web UI
 ├── main.py                   # CLI entry point
 ├── Dockerfile                # 🐳 Docker build recipe (new)
@@ -140,7 +140,7 @@ python -m pytest tests/ -v
 
 > **Don't want to deal with servers?** You can also run the app locally on your computer with `streamlit run app.py` (see Quick Start above).
 
-This guide walks you through deploying My Thinker Buddy on a **shared VPS** — a single server that runs multiple apps (like n8n, websites, or this tool) side-by-side.
+This guide walks you through deploying My Brainstorming Buddy on a **shared VPS** — a single server that runs multiple apps (like n8n, websites, or this tool) side-by-side.
 
 **Who is this for?**
 - 📊 **Data analysts** who want a team-accessible reasoning tool
@@ -175,7 +175,7 @@ Before starting, make sure you have:
 | ☁️ **A VPS (server)** | Any provider: DigitalOcean, Linode, AWS, Azure, or your own computer |
 | 🐳 **Docker** | [Install Docker](https://docs.docker.com/get-docker/) (free) |
 | 🔑 **API key** | From your sumopod account (or any OpenAI-compatible provider) |
-| 🌐 **A domain** (optional) | For using `thinker-buddy.yourdomain.com` instead of `IP:8501` |
+| 🌐 **A domain** (optional) | For using `brainstorming-buddy.yourdomain.com` instead of `IP:8501` |
 
 > **💡 Tip:** If you're on **Windows**, install [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/). If you're on **Ubuntu/Linux**, we'll install it in the next step.
 
@@ -200,11 +200,19 @@ sudo apt install docker-compose-v2 -y
 # Start Docker automatically on boot
 sudo systemctl enable --now docker
 
+# 👇 IMPORTANT: Add your user to the 'docker' group so you can run
+#    Docker commands without 'sudo' (otherwise you'll get "permission denied")
+sudo usermod -aG docker $USER
+
+# Apply the group change (log out and back in, or run:)
+newgrp docker
+
 # Verify it's working
 docker --version
 ```
 
 **What you should see:** A version number like `Docker version 24.0.7`.
+
 
 #### 🪟 For Windows VPS
 
@@ -224,15 +232,15 @@ You have two options:
 
 #### Option A: Download as ZIP (easier for non-developers)
 
-1. Go to the [My Thinker Buddy GitHub page](https://github.com/YOUR_USERNAME/my-thinker-buddy)
+1. Go to the [My Brainstorming Buddy GitHub page](https://github.com/khafidhteer/my-brainstorming-buddy)
 2. Click the green **"Code"** button → **"Download ZIP"**
 3. Upload the ZIP to your server, or unzip it on your computer and upload the folder
 
 #### Option B: Clone with Git (for developers)
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/my-thinker-buddy.git
-cd my-thinker-buddy
+git clone https://github.com/khafidhteer/my-brainstorming-buddy.git
+cd my-brainstorming-buddy
 ```
 
 ---
@@ -285,7 +293,7 @@ docker compose up -d
 docker compose ps
 ```
 
-You should see `my-thinker-buddy` listed with a status of **"Up"** (meaning running).
+You should see `my-brainstorming-buddy` listed with a status of **"Up"** (meaning running).
 
 > **💡 Tip:** The first time you run this, it may take 1-3 minutes to download everything. After that, it starts instantly.
 
@@ -301,7 +309,7 @@ http://YOUR_SERVER_IP:8501
 
 Replace `YOUR_SERVER_IP` with your server's actual IP address (e.g., `http://123.456.78.90:8501`).
 
-**You should see:** The My Thinker Buddy web interface! 🎉
+**You should see:** The My Brainstorming Buddy web interface! 🎉
 
 > **💡 Tip:** If you're running this on your **local computer** (not a VPS), use `http://localhost:8501` instead.
 
@@ -331,7 +339,7 @@ Press **Ctrl+C** to stop viewing logs and return to the command prompt.
 
 #### Updating to a new version
 
-When there's an update to My Thinker Buddy:
+When there's an update to My Brainstorming Buddy:
 
 ```bash
 # 1. Pull the latest code
@@ -345,9 +353,9 @@ That's it! The app will be updated with zero downtime.
 
 ---
 
-### 🧩 Running Multiple Apps (n8n + Thinker Buddy)
+### 🧩 Running Multiple Apps (n8n + Brainstorming Buddy)
 
-This is where Docker really shines. You can run My Thinker Buddy alongside n8n (or any other app) on the same server.
+This is where Docker really shines. You can run My Brainstorming Buddy alongside n8n (or any other app) on the same server.
 
 #### Option A: Use the included example file
 
@@ -358,7 +366,7 @@ docker compose -f docker-compose-with-n8n.yml up -d
 ```
 
 This starts:
-- **My Thinker Buddy** on port `8501`
+- **My Brainstorming Buddy** on port `8501`
 - **n8n** on port `5678`
 
 #### Option B: Add n8n to your existing setup
@@ -367,7 +375,7 @@ Edit your `docker-compose.yml` file and add the n8n service:
 
 ```yaml
 services:
-  thinker-buddy:
+  brainstorming-buddy:
     # ... (existing config, don't change this)
 
   n8n:
@@ -394,7 +402,7 @@ Follow the same pattern for any Docker app:
 
 ```yaml
 services:
-  thinker-buddy:
+  brainstorming-buddy:
     # ... existing config
 
   your-other-app:
@@ -419,7 +427,7 @@ deploy:
       memory: 512M     # Max 512 MB of RAM
 ```
 
-This ensures Thinker Buddy and n8n play nicely together.
+This ensures Brainstorming Buddy and n8n play nicely together.
 
 ---
 
@@ -427,12 +435,12 @@ This ensures Thinker Buddy and n8n play nicely together.
 
 > **🔧 For advanced users.** If you just want the app working, you can skip this section and use `http://YOUR_SERVER_IP:8501`.
 
-If you have a domain name, you can access your app at `http://thinker-buddy.yourdomain.com` instead of remembering an IP address and port number.
+If you have a domain name, you can access your app at `http://brainstorming-buddy.yourdomain.com` instead of remembering an IP address and port number.
 
 #### Step 1: Point your domain to your server
 
 In your domain registrar's DNS settings, add an **A record**:
-- **Name:** `thinker-buddy` (or whatever subdomain you want)
+- **Name:** `brainstorming-buddy` (or whatever subdomain you want)
 - **Value:** Your server's IP address
 
 #### Step 2: Install Nginx
@@ -446,19 +454,19 @@ sudo apt install nginx -y
 We've included a sample config file at `nginx/default.conf`. Copy and adapt it:
 
 ```bash
-sudo cp nginx/default.conf /etc/nginx/sites-available/thinker-buddy
+sudo cp nginx/default.conf /etc/nginx/sites-available/brainstorming-buddy
 ```
 
-Edit the file and replace `thinker-buddy.yourdomain.com` with your actual domain.
+Edit the file and replace `brainstorming-buddy.yourdomain.com` with your actual domain.
 
 ```bash
-sudo nano /etc/nginx/sites-available/thinker-buddy
+sudo nano /etc/nginx/sites-available/brainstorming-buddy
 ```
 
 Enable the site and reload:
 
 ```bash
-sudo ln -s /etc/nginx/sites-available/thinker-buddy /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/brainstorming-buddy /etc/nginx/sites-enabled/
 sudo nginx -t          # Test the config
 sudo nginx -s reload   # Apply changes
 ```
@@ -467,7 +475,7 @@ sudo nginx -s reload   # Apply changes
 
 ```bash
 sudo apt install certbot python3-certbot-nginx -y
-sudo certbot --nginx -d thinker-buddy.yourdomain.com
+sudo certbot --nginx -d brainstorming-buddy.yourdomain.com
 ```
 
 Follow the prompts. Certbot will automatically set up HTTPS for you.
@@ -475,6 +483,23 @@ Follow the prompts. Certbot will automatically set up HTTPS for you.
 ---
 
 ### 🔧 Troubleshooting
+
+#### "Permission denied while trying to connect to the Docker daemon socket"
+
+This happens on Linux when your user doesn't have permission to run Docker commands. Fix it:
+
+```bash
+# Add your user to the 'docker' group
+sudo usermod -aG docker $USER
+
+# Log out and back in, or run this to apply immediately:
+newgrp docker
+
+# Test that it worked:
+docker ps
+```
+
+You should see no errors. If you're using `sudo` to run Docker commands, you can also use `sudo docker compose up -d` as a temporary workaround.
 
 #### "Port 8501 is already in use"
 

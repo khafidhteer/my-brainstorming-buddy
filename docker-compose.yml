@@ -1,5 +1,5 @@
 # ============================================================
-# Docker Compose — My Thinker Buddy
+# Docker Compose — My Brainstorming Buddy
 # ============================================================
 # This file tells Docker how to run the app.
 #
@@ -11,12 +11,12 @@
 # ============================================================
 
 services:
-  thinker-buddy:
+  brainstorming-buddy:
     # Build from the Dockerfile in this folder
     build: .
 
     # Give the container a friendly name
-    container_name: my-thinker-buddy
+    container_name: my-brainstorming-buddy
 
     # Always restart unless the user manually stops it
     restart: unless-stopped

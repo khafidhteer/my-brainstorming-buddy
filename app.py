@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 # Page configuration
 st.set_page_config(
-    page_title="My Thinker Buddy - Chain-of-Thought Engine",
+    page_title="My Brainstorming Buddy - Chain-of-Thought Engine",
     page_icon="🤔",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -102,7 +102,7 @@ def render_header():
     col1, col2 = st.columns([3, 1])
     with col1:
         st.markdown(
-            '<div class="main-header">🤔 My Thinker Buddy</div>',
+            '<div class="main-header">🤔 My Brainstorming Buddy</div>',
             unsafe_allow_html=True,
         )
         st.markdown(
@@ -334,7 +334,7 @@ def main():
     st.markdown("---")
     st.markdown(
         "<div style='text-align: center; color: #666; font-size: 0.8rem;'>"
-        "My Thinker Buddy v1.0 | Powered by sumopod API"
+        "My Brainstorming Buddy v1.0 | Powered by sumopod API"
         "</div>",
         unsafe_allow_html=True,
     )

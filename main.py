@@ -30,7 +30,7 @@ console = Console()
 
 @click.group()
 def cli():
-    """🤔 My Thinker Buddy - Chain-of-Thought Reasoning Engine."""
+    """🤔 My Brainstorming Buddy - Chain-of-Thought Reasoning Engine."""
     pass
 
 
@@ -178,7 +178,7 @@ def _display_result(result, verbose: bool = False):
     console.print()
     console.print(
         Panel.fit(
-            f"[bold blue]🤔 My Thinker Buddy - Analysis Result[/bold blue]\n\n"
+            f"[bold blue]🤔 My Brainstorming Buddy - Analysis Result[/bold blue]\n\n"
             f"[bold]Question:[/bold] {result.question}\n"
             f"[bold]Framework:[/bold] {result.framework_name} "
             f"({result.framework_key})\n"

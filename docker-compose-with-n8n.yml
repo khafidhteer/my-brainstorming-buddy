@@ -1,5 +1,5 @@
 # ============================================================
-# Docker Compose — My Thinker Buddy + n8n (example)
+# Docker Compose — My Brainstorming Buddy + n8n (example)
 # ============================================================
 # This is a REFERENCE file showing how to run this app
 # alongside n8n on the same VPS.
@@ -13,10 +13,10 @@
 # ============================================================
 
 services:
-  # ===== My Thinker Buddy =====
-  thinker-buddy:
+  # ===== My Brainstorming Buddy =====
+  brainstorming-buddy:
     build: .
-    container_name: my-thinker-buddy
+    container_name: my-brainstorming-buddy
     restart: unless-stopped
 
     # IMPORTANT: If port 8501 is already used by another app,
@@ -28,7 +28,7 @@ services:
     env_file:
       - .env
 
-    # Optional: Limit resources so n8n and Thinker Buddy don't compete
+    # Optional: Limit resources so n8n and Brainstorming Buddy don't compete
     deploy:
       resources:
         limits:
@@ -43,7 +43,7 @@ services:
       start_period: 15s
 
   # ===== n8n (Workflow Automation) =====
-  # This is an example of running n8n alongside Thinker Buddy.
+  # This is an example of running n8n alongside Brainstorming Buddy.
   # Remove this section if you don't need n8n.
   n8n:
     image: n8nio/n8n

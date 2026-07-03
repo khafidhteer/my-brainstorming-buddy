@@ -1,4 +1,4 @@
-# Cline Rules for my-thinker-buddy
+# Cline Rules for my-brainstorming-buddy
 
 ## Project Overview
 Chain-of-Thought Reasoning Engine that processes questions through structured analytical frameworks (Fishbone, Fault Tree, Iceberg, Apollo RCA, STAMP, Swiss Cheese, Cynefin, DMAIC) using an OpenAI-compatible API (sumopod).

@@ -1,4 +1,4 @@
-# My Thinker Buddy - Chain-of-Thought Reasoning Engine
+# My Brainstorming Buddy - Chain-of-Thought Reasoning Engine
 # Core dependencies
 openai>=1.0.0
 python-dotenv>=1.0.0
