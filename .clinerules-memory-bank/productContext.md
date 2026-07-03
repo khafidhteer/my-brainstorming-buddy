@@ -24,19 +24,50 @@ Users often ask complex analytical questions that require structured reasoning r
 ### Strategist/Decision-Maker
 - Faces complex, ambiguous situations
 - Needs to classify problems before acting
-- Benefits from Cynefin, Iceberg Model
+- Benefits from Cynefin, Iceberg Model, Three Horizons of Growth
 
 ### Quality Manager
 - Runs process improvement initiatives
 - Needs data-driven improvement methodology
 - Benefits from DMAIC, Fishbone
 
+### Product Manager / Innovator
+- Designs products and features for specific customer needs
+- Needs to understand what customers are truly trying to accomplish
+- Benefits from JTBD, Value Proposition Canvas, Blue Ocean Strategy
+
+### Marketing Strategist
+- Plans go-to-market campaigns and brand positioning
+- Needs to segment markets and position offerings effectively
+- Benefits from STP, Ideal Customer Profile, Technology Adoption Life Cycle
+
+### Startup Founder / Entrepreneur
+- Decides which market to enter and how to scale
+- Needs to identify beachhead markets and plan expansion
+- Benefits from Beachhead Market Strategy, Blue Ocean Strategy, Three Horizons of Growth
+
+### Sales Leader
+- Defines target accounts and optimizes lead scoring
+- Needs to focus the sales team on high-value prospects
+- Benefits from Ideal Customer Profile, STP
+
 ## How It Should Work
 1. User asks a question in natural language
-2. System auto-detects the best framework (or user overrides)
+2. System auto-detects the best framework from 16 available (or user overrides)
 3. System executes the framework step-by-step, each step building on previous outputs
 4. User sees the complete reasoning chain with intermediate results
 5. User can export the analysis as Markdown or JSON
 
 ## Core Value Proposition
 "Get not just an answer, but the **reasoning path** that led to it, validated through a formal analytical framework."
+
+## Framework Categories
+The 16 frameworks fall into two broad categories:
+
+### Analytical / Root Cause (8 frameworks)
+For investigating problems, failures, and incidents:
+Fishbone, Fault Tree, Iceberg, Apollo RCA, STAMP, Swiss Cheese, Cynefin, DMAIC
+
+### Business / Strategy (8 frameworks)
+For market decisions, customer understanding, and growth planning:
+JTBD, Value Proposition Canvas, Beachhead Market, Technology Adoption Life Cycle, Blue Ocean, Ideal Customer Profile, STP, Three Horizons of Growth

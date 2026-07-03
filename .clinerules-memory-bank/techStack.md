@@ -33,6 +33,13 @@
 | `pytest-asyncio` | >=0.21.0 | Async test support |
 | `pytest-mock` | >=3.10.0 | Mocking support |
 
+## Framework Library
+| Category | Count | Frameworks |
+|----------|-------|------------|
+| Analytical / Root Cause | 8 | Fishbone, Fault Tree, Iceberg, Apollo RCA, STAMP, Swiss Cheese, Cynefin, DMAIC |
+| Business / Strategy | 8 | JTBD, Value Proposition Canvas, Beachhead Market, Technology Adoption Life Cycle, Blue Ocean, Ideal Customer Profile, STP, Three Horizons of Growth |
+| **Total** | **16** | |
+
 ## Infrastructure
 
 ### Development Machine
@@ -42,16 +49,16 @@
 | IDE | VS Code |
 | Shell | cmd.exe / PowerShell |
 
-### Production (Tencent VPS)
+### Production (VPS)
 | Spec | Value |
 |------|-------|
 | vCPU | 2 cores |
 | RAM | 2 GB |
 | Storage | 40 GB |
-| OS | Linux (Ubuntu recommended) |
+| OS | Linux (Ubuntu recommended) or Windows Server |
 | Port | 8501 (Streamlit) |
-| Process Manager | `screen` or `systemd` |
-| Reverse Proxy | Nginx (if multiple apps) |
+| Orchestration | Docker + Docker Compose |
+| Reverse Proxy | Nginx (if multiple apps / domain names) |
 
 ## API Contract
 

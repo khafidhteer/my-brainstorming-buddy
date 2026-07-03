@@ -1,31 +1,38 @@
 # Active Context
 
-## Current State (2026-07-01)
-Project is **complete and fully built**. All 28 source files created, 25 tests passing. Ready for API integration testing with sumopod.
-
-**⚠️ Bug fixed:** `Orchestrator.init()` was called with wrong keyword argument `llm=` instead of `llm_adapter=` in `app.py`. Fixed on 2026-07-01.
+## Current State (2026-07-03)
+Project has **expanded from 8 to 16 frameworks** — 8 original analytical frameworks plus 8 new business/strategy frameworks. All 41 tests pass.
 
 ## Recent Changes
-- Built complete Chain-of-Thought Reasoning Engine
-- Implemented 8 analytical frameworks (Fishbone, Fault Tree, Iceberg, Apollo RCA, STAMP, Swiss Cheese, Cynefin, DMAIC)
-- Created Streamlit web UI (`app.py`) with sidebar config, step-by-step display, export
-- Created CLI (`main.py`) with `analyze` and `frameworks` commands
-- 25 unit tests passing for all frameworks, prompt generation, and selector
-- **Bug fix (2026-07-01):** Changed `Orchestrator(llm=llm)` → `Orchestrator(llm_adapter=llm)` in `app.py` line 175 — the constructor parameter `llm_adapter` was being passed as `llm`, causing `TypeError: Orchestrator.init() got an unexpected keyword argument 'llm'`
+- **Added 8 new business/strategy frameworks:**
+  1. Jobs-to-be-Done (JTBD) — 5 steps (Christensen, Ulwick, Moesta)
+  2. Value Proposition Canvas — 5 steps (Osterwalder)
+  3. Beachhead Market Strategy — 4 steps (Aulet)
+  4. Technology Adoption Life Cycle — 4 steps (Moore)
+  5. Blue Ocean Strategy — 5 steps (Kim & Mauborgne)
+  6. Ideal Customer Profile — 4 steps (Ross)
+  7. STP (Segmentation, Targeting, Positioning) — 4 steps (Kotler, Ries, Trout)
+  8. Three Horizons of Growth — 5 steps (McKinsey)
+- Updated `src/frameworks/__init__.py` — all 8 imports and exports
+- Updated `src/framework_selector.py` — registry grew from 8→16, classification prompt expanded
+- Updated `tests/test_frameworks.py` — 41 tests (was 25), all parametrized via `ALL_FRAMEWORKS`
+- Updated `README.md` — framework table has 16 rows, project structure updated
+- All 41 tests passing in 0.59s
 
 ## Immediate Next Steps
 ### General Next Steps
 - [ ] Create `.env` from `.env.example` with sumopod API credentials
 - [ ] Run end-to-end test with a real question via CLI or Streamlit
-- [ ] Deploy to Tencent VPS (2vCPU, 2GB RAM) using `screen` or `systemd`
-- [ ] Set up Nginx reverse proxy if needed for multiple apps
+- [ ] Deploy to VPS using Docker
+- [ ] Commit and push to GitHub
 
 ## Active Decisions
 - **LLM Provider**: Sumopod (OpenAI-compatible API)
 - **UI**: Streamlit (for web + VPS deployment)
-- **Framework Selection**: Auto-detect with manual override
-- **Default Framework**: Fishbone Diagram
+- **Framework Selection**: Auto-detect with manual override — LLM now chooses from 16 frameworks
+- **Default Framework**: Fishbone Diagram (unchanged)
 - **API Key**: Via `.env` file
+- **Architecture Pattern**: All 16 frameworks follow the same `BaseFramework` template method pattern — no special cases
 
 ## Decision Log
 | Date | Decision | Rationale |
@@ -35,3 +42,7 @@ Project is **complete and fully built**. All 28 source files created, 25 tests p
 | 2026-06-30 | `click` + `rich` for CLI | Rich terminal output, easy argument parsing |
 | 2026-06-30 | Fishbone as default fallback | Most versatile for general root cause questions |
 | 2026-06-30 | Auto-detect via LLM | User wants hands-off framework selection |
+| 2026-07-01 | Fixed `Orchestrator(llm=)` → `Orchestrator(llm_adapter=)` | Constructor parameter name mismatch in `app.py` |
+| 2026-07-03 | Added 8 business/strategy frameworks | User requested expansion from analytical-only to include marketing, strategy, and growth frameworks |
+| 2026-07-03 | Kept `_` separator in framework keys | Consistent with existing convention (e.g., `fault_tree`, `apollo_rca`) |
+| 2026-07-03 | Tests parametrized via `ALL_FRAMEWORKS` list | Adding new frameworks automatically generates tests — no per-framework test functions needed |

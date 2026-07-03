@@ -1,5 +1,4 @@
 """Tests for all framework implementations."""
-
 import pytest
 from src.frameworks import (
     FishboneFramework,
@@ -10,15 +9,44 @@ from src.frameworks import (
     SwissCheeseFramework,
     CynefinFramework,
     DMAICFramework,
+    JTBDFramework,
+    ValuePropositionCanvasFramework,
+    BeachheadMarketFramework,
+    TechAdoptionLifecycleFramework,
+    BlueOceanFramework,
+    IdealCustomerProfileFramework,
+    STPFramework,
+    ThreeHorizonsFramework,
 )
 from src.frameworks.base import StepDefinition
+
+# Collect all framework classes for parametrized tests
+ALL_FRAMEWORKS = [
+    FishboneFramework,
+    FaultTreeFramework,
+    IcebergFramework,
+    ApolloRCAFramework,
+    STAMPFramework,
+    SwissCheeseFramework,
+    CynefinFramework,
+    DMAICFramework,
+    JTBDFramework,
+    ValuePropositionCanvasFramework,
+    BeachheadMarketFramework,
+    TechAdoptionLifecycleFramework,
+    BlueOceanFramework,
+    IdealCustomerProfileFramework,
+    STPFramework,
+    ThreeHorizonsFramework,
+]
 
 
 class TestBaseFramework:
     """Test base framework contract."""
 
-    def test_fishbone_has_required_properties(self):
-        fw = FishboneFramework()
+    @pytest.mark.parametrize("fw_cls", ALL_FRAMEWORKS)
+    def test_framework_has_required_properties(self, fw_cls):
+        fw = fw_cls()
         assert fw.name
         assert fw.description
         assert len(fw.steps) > 0
@@ -28,62 +56,11 @@ class TestBaseFramework:
             assert step.description
             assert step.system_prompt
 
-    def test_fault_tree_has_required_properties(self):
-        fw = FaultTreeFramework()
-        assert fw.name
-        assert fw.description
-        assert len(fw.steps) > 0
-
-    def test_iceberg_has_required_properties(self):
-        fw = IcebergFramework()
-        assert fw.name
-        assert fw.description
-        assert len(fw.steps) > 0
-
-    def test_apollo_rca_has_required_properties(self):
-        fw = ApolloRCAFramework()
-        assert fw.name
-        assert fw.description
-        assert len(fw.steps) > 0
-
-    def test_stamp_has_required_properties(self):
-        fw = STAMPFramework()
-        assert fw.name
-        assert fw.description
-        assert len(fw.steps) > 0
-
-    def test_swiss_cheese_has_required_properties(self):
-        fw = SwissCheeseFramework()
-        assert fw.name
-        assert fw.description
-        assert len(fw.steps) > 0
-
-    def test_cynefin_has_required_properties(self):
-        fw = CynefinFramework()
-        assert fw.name
-        assert fw.description
-        assert len(fw.steps) > 0
-
-    def test_dmaic_has_required_properties(self):
-        fw = DMAICFramework()
-        assert fw.name
-        assert fw.description
-        assert len(fw.steps) > 0
-
 
 class TestFrameworkPromptGeneration:
     """Test that each framework generates valid prompts."""
 
-    @pytest.mark.parametrize("framework_cls", [
-        FishboneFramework,
-        FaultTreeFramework,
-        IcebergFramework,
-        ApolloRCAFramework,
-        STAMPFramework,
-        SwissCheeseFramework,
-        CynefinFramework,
-        DMAICFramework,
-    ])
+    @pytest.mark.parametrize("framework_cls", ALL_FRAMEWORKS)
     def test_generate_prompt_all_steps(self, framework_cls):
         fw = framework_cls()
         question = "Why did the production line stop?"
@@ -131,37 +108,20 @@ class TestFrameworkMetadata:
     """Test framework metadata and descriptions."""
 
     def test_all_frameworks_have_unique_names(self):
-        frameworks = [
-            FishboneFramework(),
-            FaultTreeFramework(),
-            IcebergFramework(),
-            ApolloRCAFramework(),
-            STAMPFramework(),
-            SwissCheeseFramework(),
-            CynefinFramework(),
-            DMAICFramework(),
-        ]
+        frameworks = [cls() for cls in ALL_FRAMEWORKS]
         names = [fw.name for fw in frameworks]
         assert len(names) == len(set(names)), "Framework names must be unique"
 
     def test_all_frameworks_have_descriptions(self):
-        frameworks = [
-            FishboneFramework(),
-            FaultTreeFramework(),
-            IcebergFramework(),
-            ApolloRCAFramework(),
-            STAMPFramework(),
-            SwissCheeseFramework(),
-            CynefinFramework(),
-            DMAICFramework(),
-        ]
+        frameworks = [cls() for cls in ALL_FRAMEWORKS]
         for fw in frameworks:
             assert len(fw.description) > 20, f"{fw.name} description too short"
 
     def test_step_count_ranges(self):
-        """Fishbone, Iceberg, Swiss Cheese, Cynefin = 4 steps.
-        Fault Tree = 4 steps.
-        Apollo RCA, STAMP, DMAIC = 5 steps."""
+        """4-step frameworks: Fishbone, Fault Tree, Iceberg, Swiss Cheese, Cynefin,
+        Beachhead Market, Tech Adoption Lifecycle, Ideal Customer Profile, STP.
+        5-step frameworks: Apollo RCA, STAMP, DMAIC, JTBD, Value Proposition Canvas,
+        Blue Ocean, Three Horizons."""
         assert FishboneFramework().total_steps == 4
         assert FaultTreeFramework().total_steps == 4
         assert IcebergFramework().total_steps == 4
@@ -170,6 +130,14 @@ class TestFrameworkMetadata:
         assert SwissCheeseFramework().total_steps == 4
         assert CynefinFramework().total_steps == 4
         assert DMAICFramework().total_steps == 5
+        assert JTBDFramework().total_steps == 5
+        assert ValuePropositionCanvasFramework().total_steps == 5
+        assert BeachheadMarketFramework().total_steps == 4
+        assert TechAdoptionLifecycleFramework().total_steps == 4
+        assert BlueOceanFramework().total_steps == 5
+        assert IdealCustomerProfileFramework().total_steps == 4
+        assert STPFramework().total_steps == 4
+        assert ThreeHorizonsFramework().total_steps == 5
 
 
 class TestStepDefinition:
@@ -208,16 +176,22 @@ class TestFrameworkSelector:
     def test_list_frameworks(self):
         from src.framework_selector import list_frameworks
         frameworks = list_frameworks()
-        assert len(frameworks) == 8
+        assert len(frameworks) == 16
         keys = [fw["key"] for fw in frameworks]
         assert "fishbone" in keys
         assert "dmaic" in keys
         assert "stamp" in keys
+        assert "jtbd" in keys
+        assert "blue_ocean" in keys
+        assert "three_horizons" in keys
 
     def test_framework_registry_keys(self):
         from src.framework_selector import FRAMEWORK_REGISTRY
         expected_keys = {
             "fishbone", "fault_tree", "iceberg", "apollo_rca",
             "stamp", "swiss_cheese", "cynefin", "dmaic",
+            "jtbd", "value_proposition_canvas", "beachhead_market",
+            "tech_adoption_lifecycle", "blue_ocean", "ideal_customer_profile",
+            "stp", "three_horizons",
         }
         assert set(FRAMEWORK_REGISTRY.keys()) == expected_keys

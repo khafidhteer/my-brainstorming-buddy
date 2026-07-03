@@ -21,6 +21,14 @@
 | **Swiss Cheese Model** | 4 | Layered defense systems, healthcare, aviation safety |
 | **Cynefin Framework** | 4 | Problem classification, strategy, decision-making |
 | **DMAIC** | 5 | Process improvement, Six Sigma, quality control |
+| **Jobs-to-be-Done (JTBD)** | 5 | Customer needs, product innovation, market positioning |
+| **Value Proposition Canvas** | 5 | Value proposition design, product-market fit |
+| **Beachhead Market Strategy** | 4 | Market entry, startup strategy, adjacent expansion |
+| **Technology Adoption Life Cycle** | 4 | Tech marketing, crossing the chasm, product launches |
+| **Blue Ocean Strategy** | 5 | Market creation, differentiation, innovation strategy |
+| **Ideal Customer Profile** | 4 | Sales targeting, lead scoring, marketing focus |
+| **STP (Segmentation, Targeting, Positioning)** | 4 | Go-to-market planning, brand strategy, campaigns |
+| **Three Horizons of Growth** | 5 | Corporate strategy, innovation management, long-term growth |
 
 ## 🚀 Quick Start
 
@@ -101,17 +109,25 @@ my-thinker-buddy/
 │   └── frameworks/
 │       ├── __init__.py
 │       ├── base.py           # Abstract base class
-│       ├── fishbone.py       # Fishbone Diagram
-│       ├── fault_tree.py     # Fault Tree Analysis
-│       ├── iceberg.py        # Iceberg Model
-│       ├── apollo_rca.py     # Apollo Root Cause Analysis
-│       ├── stamp.py          # STAMP
-│       ├── swiss_cheese.py   # Swiss Cheese Model
-│       ├── cynefin.py        # Cynefin Framework
-│       └── dmaic.py          # DMAIC
+│       ├── fishbone.py                 # Fishbone Diagram
+│       ├── fault_tree.py               # Fault Tree Analysis
+│       ├── iceberg.py                  # Iceberg Model
+│       ├── apollo_rca.py               # Apollo Root Cause Analysis
+│       ├── stamp.py                    # STAMP
+│       ├── swiss_cheese.py             # Swiss Cheese Model
+│       ├── cynefin.py                  # Cynefin Framework
+│       ├── dmaic.py                    # DMAIC
+│       ├── jtbd.py                     # Jobs-to-be-Done (JTBD)
+│       ├── value_proposition_canvas.py # Value Proposition Canvas
+│       ├── beachhead_market.py         # Beachhead Market Strategy
+│       ├── tech_adoption_lifecycle.py  # Technology Adoption Life Cycle
+│       ├── blue_ocean.py               # Blue Ocean Strategy
+│       ├── ideal_customer_profile.py   # Ideal Customer Profile
+│       ├── stp.py                      # STP (Segmentation, Targeting, Positioning)
+│       └── three_horizons.py           # Three Horizons of Growth
 └── tests/
     ├── __init__.py
-    └── test_frameworks.py    # 25+ tests
+    └── test_frameworks.py    # 41 tests for all 16 frameworks
 ```
 
 ## 🧪 Running Tests

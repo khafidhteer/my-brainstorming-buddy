@@ -11,6 +11,7 @@ User Question
 │  - Auto-detect via LLM classification          │
 │  - Manual override by framework key             │
 │  - Falls back to Fishbone on error              │
+│  - 16 frameworks in registry                   │
 └──────────────────────┬──────────────────────────┘
                        │
                        ▼
@@ -47,7 +48,7 @@ User Question
 ## Design Patterns
 
 ### 1. Template Method Pattern (BaseFramework)
-All frameworks inherit from `BaseFramework` which defines the interface:
+All 16 frameworks inherit from `BaseFramework` which defines the interface:
 - `name`, `description`, `steps` - metadata properties
 - `generate_prompt()` - abstract method each framework implements
 - `should_terminate()` - optional early termination hook
@@ -58,7 +59,7 @@ The `select_framework()` function acts as a strategy selector:
 - Uses LLM to classify the question
 - Returns the appropriate framework instance
 - Supports manual override via `preferred` parameter
-- Registry pattern via `FRAMEWORK_REGISTRY` dict
+- Registry pattern via `FRAMEWORK_REGISTRY` dict (now 16 entries)
 
 ### 3. Chain-of-Responsibility (Orchestrator)
 The orchestrator executes steps sequentially:
@@ -94,3 +95,5 @@ Question (str)
 3. **Framework state is stateless** - Each call to `generate_prompt()` receives full context; no internal state
 4. **Separation of concerns** - LLM adapter, framework logic, orchestration, and formatting are all separate modules
 5. **Streamlit + CLI dual interface** - Same backend engine supports both UIs
+6. **Unified framework pattern** - All 16 frameworks (analytical AND business/strategy) follow the exact same `BaseFramework` interface — no distinction in code, only in prompt content
+7. **Parametrized testing** - Tests use an `ALL_FRAMEWORKS` list so adding a new framework automatically generates tests without modifying test functions
